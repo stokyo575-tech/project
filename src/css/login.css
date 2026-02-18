@@ -274,6 +274,107 @@ button[type="submit"]:disabled {
   transform: none;
 }
 
+/* ====== FORM OPTIONS ====== */
+.form-options {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 12px 0;
+  gap: 12px;
+  font-size: 0.85rem;
+}
+
+.remember-me {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  color: var(--text-muted);
+  transition: color var(--transition);
+}
+
+.remember-me input {
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+  accent-color: var(--accent-primary);
+}
+
+.remember-me:hover {
+  color: var(--text-secondary);
+}
+
+.toggle-register {
+  background: none;
+  border: none;
+  color: var(--accent-primary);
+  cursor: pointer;
+  font-size: 0.85rem;
+  text-decoration: underline;
+  transition: color var(--transition);
+  padding: 0;
+}
+
+.toggle-register:hover {
+  color: var(--accent-secondary);
+}
+
+/* ====== DIVIDER ====== */
+.divider-or {
+  text-align: center;
+  margin: 20px 0;
+  position: relative;
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.divider-or::before,
+.divider-or::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  width: 40%;
+  height: 1px;
+  background: var(--border);
+}
+
+.divider-or::before {
+  left: 0;
+}
+
+.divider-or::after {
+  right: 0;
+}
+
+/* ====== STAY LOGGED OUT BUTTON ====== */
+.btn-stay-out {
+  width: 100%;
+  padding: 12px 18px;
+  background: transparent;
+  border: 2px solid var(--accent-primary);
+  color: var(--accent-primary);
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-size: 0.9rem;
+}
+
+.btn-stay-out:hover {
+  background: var(--accent-primary);
+  color: #000;
+  transform: translateY(-2px);
+}
+
+.btn-stay-out:active {
+  transform: translateY(0);
+}
+
 /* ====== ERROR MESSAGE ====== */
 .error {
   color: var(--error);
@@ -316,5 +417,14 @@ button[type="submit"]:disabled {
     width: 70px;
     height: 70px;
     font-size: 2rem;
+  }
+  
+  .form-options {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .divider-or {
+    margin: 16px 0;
   }
 }

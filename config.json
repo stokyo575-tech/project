@@ -1,0 +1,33 @@
+{
+  "app": {
+    "name": "WhiteGpt",
+    "version": "2.0",
+    "theme": "dark"
+  },
+  "api": {
+    "provider": "gemini",
+    "model": "gemini-1.5-flash",
+    "endpoint": "https://generativelanguage.googleapis.com/v1beta/models",
+    "token": "YOUR_GEMINI_API_KEY_HERE",
+    "description": "Using Google Gemini API - Free tier available",
+    "maxTokens": 2000,
+    "temperature": 0.7,
+    "topP": 0.95,
+    "topK": 40
+  },
+  "auth": {
+    "requireLogin": true,
+    "sessionTimeout": 3600,
+    "maxLoginAttempts": 5,
+    "logFile": "Login.log",
+    "stayLoggedOut": false,
+    "rememberMe": true
+  },
+  "ui": {
+    "messageMaxWidth": "70%",
+    "thinkingAnimation": true,
+    "typingAnimation": true,
+    "showThinkingProcess": true
+  },
+  "note": "Free AI Token Options: 1. Google Gemini (FREE with quota) 2. HuggingFace (FREE) 3. Replicate (FREE credits) 4. Together AI (FREE)"
+}

@@ -57,8 +57,28 @@ fileInput.addEventListener('change', async (e) => {
     previewFileSize.textContent = formatFileSize(file.size);
     filePreview.classList.add('active');
 });
+
+// Photo upload handler
+const photoButton = document.getElementById('photo-button');
+const photoInput = document.createElement('input');
+photoInput.type = 'file';
+photoInput.accept = 'image/*';
+photoInput.style.display = 'none';
+photoInput.id = 'photo-input';
+document.body.appendChild(photoInput);
+
+photoButton.addEventListener('click', () => photoInput.click());
+photoInput.addEventListener('change', async (e) => {
+    const file = e.target.files[0];
+    if(!file || file.size===0){alert('Foto kosong!');return;}
+    uploadedFile = file;
+    previewFileName.textContent = '🖼️ ' + file.name;
+    previewFileSize.textContent = formatFileSize(file.size);
+    filePreview.classList.add('active');
+});
+
 removeFileBtn.addEventListener('click', () => {
-    uploadedFile = null; fileInput.value = ''; filePreview.classList.remove('active');
+    uploadedFile = null; fileInput.value = ''; photoInput.value = ''; filePreview.classList.remove('active');
 });
 function formatFileSize(bytes) {
     if (bytes === 0) return '0 Bytes';

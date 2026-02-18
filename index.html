@@ -222,19 +222,25 @@
     </div>
     
     <div class="input-wrapper">
+      <!-- LEFT SIDE: File & Photo buttons -->
       <div class="input-controls-left">
         <input type="file" id="file-input" accept=".txt,.js,.py,.html,.css,.json,.md,.java,.cpp,.c,.php,.rb,.go,.rs,.ts,.jsx,.tsx,.vue,.xml,.yaml,.yml,.sh,.bat" />
-        <button id="file-button" class="icon-btn btn-ripple icon-btn-left" title="Upload file kode">
+        <button id="file-button" class="icon-btn btn-ripple icon-btn-file" title="Upload file">
           <i class="fas fa-paperclip"></i>
+        </button>
+        <button id="photo-button" class="icon-btn btn-ripple icon-btn-photo" title="Upload photo">
+          <i class="fas fa-image"></i>
         </button>
       </div>
       
+      <!-- CENTER: Chat Input -->
       <div class="input-container">
-        <textarea id="chat-input" placeholder="Ketik pesan atau upload file kode..." rows="1"></textarea>
+        <textarea id="chat-input" placeholder="Ketik pesan..." rows="1"></textarea>
       </div>
 
+      <!-- RIGHT SIDE: Voice Note & Send -->
       <div class="input-controls-right">
-        <button id="voice-note-btn" class="icon-btn btn-ripple icon-btn-right" title="Voice Note / Pesan Suara">
+        <button id="voice-note-btn" class="icon-btn btn-ripple icon-btn-voice" title="Voice Note">
           <i class="fas fa-microphone"></i>
         </button>
         <button id="send-button" class="send-btn btn-ripple btn-shimmer">

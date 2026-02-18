@@ -1,0 +1,110 @@
+======================================================
+    WHITEGPT - AI TOKEN SETUP GUIDE
+======================================================
+
+CURRENT SETUP: Google Gemini API (FREE)
+
+Gemini API sedang digunakan dengan beberapa API keys yang sudah tersimpan.
+Untuk mendapatkan API key gratis Gemini:
+
+1. Buka: https://aistudio.google.com/app/apikey
+2. Klik "Create API Key"
+3. Copy key dan paste di config.json atau config.js
+
+======================================================
+
+ALTERNATIVE FREE AI TOKENS:
+
+1. GOOGLE GEMINI (REKOMENDASI - GRATIS)
+   - URL: https://aistudio.google.com
+   - Limit: 60 requests/minute (generous quota)
+   - Model: gemini-1.5-flash (recommended)
+   - Setup: Di config.js sudah siap, tinggal add key
+   - Pros: Powerful, free, no credit card needed
+   - Cons: Requires registration
+
+2. HUGGINGFACE (GRATIS)
+   - URL: https://huggingface.co
+   - Limit: Fair use policy
+   - Model: Banyak pilihan (Mistral, Llama, dll)
+   - Setup: Perlu ganti fetch endpoint
+   - Pros: Open source models, banyak pilihan
+   - Cons: Slower than commercial APIs
+
+3. TOGETHER AI (GRATIS + $5 CREDIT)
+   - URL: https://www.together.ai
+   - Limit: $5 free credits per month
+   - Model: Meta Llama, Mistral, dll
+   - Setup: Perlu ganti endpoint dan model
+   - Pros: Good speed, recent models
+   - Cons: Limited free credits
+
+4. REPLICATE (GRATIS TRIAL)
+   - URL: https://replicate.com
+   - Limit: Free tier available
+   - Model: Berbagai model open source
+   - Setup: Different API structure
+   - Pros: Simple API, good documentation
+   - Cons: Limited free tier
+
+5. GROQ (GRATIS - TERCEPAT!)
+   - URL: https://console.groq.com
+   - Limit: 30 requests/minute
+   - Model: Mixtral, LLaMA
+   - Setup: Perlu ganti endpoint
+   - Pros: SUPER CEPAT, gratis unlimited inference!
+   - Cons: Inference only (no fine-tuning)
+
+======================================================
+
+CARA GANTI API TOKEN DI CONFIG:
+
+1. Edit config.json:
+   ```
+   "api": {
+     "token": "YOUR_NEW_TOKEN_HERE",
+     "model": "model-name"
+   }
+   ```
+
+2. Atau edit config.js (di src/js/):
+   ```
+   API_KEYS: ["key1", "key2", "key3"]
+   ```
+
+3. Edit main-qwen-ui.js untuk ganti endpoint jika perlu
+
+======================================================
+
+CURRENT GEMINI SETUP STATUS:
+
+Model: gemini-1.5-flash-preview-09-2025
+API Keys: 5 keys sudah tersimpan di config.js
+Status: READY TO USE
+
+Untuk test:
+- Buka: http://localhost:8000
+- Login dengan user/pass di login page
+- Send message
+- Lihat AI response
+
+======================================================
+
+REKOMENDASI TERBAIK:
+
+1. Untuk Kecepatan: GROQ (30 req/min, instant response)
+2. Untuk Power: Google Gemini (60 req/min, smart)
+3. Untuk Open Source: HuggingFace (unlimited, free)
+4. Untuk Reliability: Together AI ($5 monthly credits)
+
+Pilih salah satu sesuai kebutuhan, atau kombinasi beberapa!
+
+======================================================
+
+CATATAN:
+- Jangan share API keys di public repositories
+- config.js sudah di .gitignore untuk keamanan
+- Test dengan dummy requests dulu sebelum deploy
+- Monitor quota/credits regularly
+
+======================================================
