@@ -21,7 +21,7 @@ async function sendMessageWithThinking() {
         if (!userMessage) return;
     }
     
-    // Display user message once
+    // Display user message once (RIGHT SIDE)
     window.thinkingUI.displayUserMessage(userMessage);
 
     // Security check
@@ -36,9 +36,10 @@ async function sendMessageWithThinking() {
     chatInput.style.height = 'auto';
     isProcessing = true;
     sendButton.disabled = true;
+    sendButton.innerHTML = '<span class="button-text">💭 Thinking...</span>';
 
-    // Show thinking state
-    const thinkingElement = window.thinkingUI.showThinking(userMessage);
+    // Show thinking state (LEFT SIDE) with placeholder
+    const thinkingElement = window.thinkingUI.showThinking(userMessage, 'Analyzing your request...');
 
     let attempts = 0;
     const maxAttempts = window.CONFIG.API_KEYS.length * 2;
