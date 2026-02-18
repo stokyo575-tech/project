@@ -10,7 +10,6 @@ async function sendMessageWithThinking() {
         try {
             const content = await readFileContent(uploadedFile);
             userMessage = `File: ${uploadedFile.name}\n\n\`\`\`\n${content}\n\`\`\`\n\n${userMessage || 'Tolong analisis kode ini.'}`;
-            window.thinkingUI.displayUserMessage(userMessage);
             uploadedFile = null;
             fileInput.value = '';
             filePreview.classList.remove('active');
@@ -20,8 +19,10 @@ async function sendMessageWithThinking() {
         }
     } else {
         if (!userMessage) return;
-        window.thinkingUI.displayUserMessage(userMessage);
     }
+    
+    // Display user message once
+    window.thinkingUI.displayUserMessage(userMessage);
 
     // Security check
     if (isJailbreak(userMessage)) {
@@ -87,6 +88,9 @@ async function sendMessageWithThinking() {
             messages.push({ role: 'model', parts: [{ text: aiContent }] });
             success = true;
             setStatusOnline(true);
+            
+            // Save chat with auto-generated title from first user message
+            saveCurrentChat();
 
         } catch (err) {
             attempts++;
@@ -110,10 +114,6 @@ async function sendMessageWithThinking() {
     sendButton.disabled = false;
     sendButton.innerHTML = '<span class="button-text">Kirim</span>';
     chatInput.focus();
-
-    if (success) {
-        saveCurrentChat();
-    }
 }
 
 // Replace original sendMessage

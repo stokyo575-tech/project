@@ -21,24 +21,52 @@ class SidebarController {
   }
 
   setupEventListeners() {
-    // Toggle sidebar
+    // Toggle sidebar - full area click detection
     if (this.toggleBtn) {
-      this.toggleBtn.addEventListener('click', () => this.toggleSidebar());
+      this.toggleBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        this.toggleSidebar();
+      });
+    }
+
+    // Also toggle on entire sidebar header for better UX
+    if (this.sidebar) {
+      const header = this.sidebar.querySelector('.sidebar-header');
+      if (header) {
+        // Only toggle on left edge or toggle button
+        header.addEventListener('click', (e) => {
+          if (e.target === this.toggleBtn || e.target.closest('.toggle-btn')) {
+            e.stopPropagation();
+            this.toggleSidebar();
+          }
+        });
+      }
     }
 
     // New chat
     if (this.newChatBtn) {
-      this.newChatBtn.addEventListener('click', () => this.handleNewChat());
+      this.newChatBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        this.handleNewChat();
+      });
     }
 
     // User menu
     if (this.userMenuBtn) {
-      this.userMenuBtn.addEventListener('click', () => this.showUserMenu());
+      this.userMenuBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        this.showUserMenu();
+      });
     }
 
     // Close sidebar on mobile when clicking chat
     if (window.innerWidth < 768) {
       document.addEventListener('click', (e) => {
+        // Don't close if clicking inside sidebar
+        if (e.target.closest('#sidebar')) {
+          return;
+        }
+        
         if (e.target.closest('#chat-window') || e.target.closest('#input-area')) {
           if (!this.isCollapsed) {
             this.toggleSidebar();

@@ -7,14 +7,11 @@ class ThinkingUI {
     this.isThinking = false;
   }
 
-  // Tampilkan thinking state
+  // Tampilkan thinking state (fast animation)
   showThinking(userMessage) {
     this.isThinking = true;
     
-    // Display user message first
-    this.displayUserMessage(userMessage);
-    
-    // Create thinking container
+    // Create thinking container - fast animation (200ms)
     const thinkingContainer = document.createElement('div');
     thinkingContainer.className = 'message-container thinking-container';
     thinkingContainer.innerHTML = `
@@ -44,21 +41,23 @@ class ThinkingUI {
     return thinkingContainer;
   }
 
-  // Hide thinking dan show response
+  // Hide thinking dan show response (fast - 150ms)
   hideThinking(thinkingElement, aiResponse) {
     this.isThinking = false;
     
     if (thinkingElement && thinkingElement.parentNode) {
-      // Fade out thinking
+      // Quick fade out thinking
       thinkingElement.style.opacity = '0';
-      thinkingElement.style.transition = 'opacity 0.3s ease';
+      thinkingElement.style.transition = 'opacity 0.15s ease';
       
       setTimeout(() => {
-        thinkingElement.remove();
-      }, 300);
+        if (thinkingElement.parentNode) {
+          thinkingElement.remove();
+        }
+      }, 150);
     }
     
-    // Display AI response
+    // Display AI response immediately
     this.displayAIMessage(aiResponse);
   }
 
