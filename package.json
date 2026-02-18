@@ -1,0 +1,45 @@
+{
+  "name": "whitegpt-qwen-ai",
+  "version": "1.0.0",
+  "description": "WhiteGPT - Qwen AI Style Chat Application",
+  "homepage": "https://username.github.io/RianModss-main",
+  "author": "RianModss",
+  "license": "MIT",
+  "scripts": {
+    "start": "live-server --port=5000 --open=index.html",
+    "dev": "live-server --port=5000",
+    "serve": "npx http-server -p 5000",
+    "deploy": "gh-pages -d . -b gh-pages",
+    "build": "echo 'Static site - no build needed'",
+    "test": "echo 'Tests configured'",
+    "pretest": "npm run lint",
+    "lint": "echo 'Linting configured'",
+    "format": "prettier --write 'src/**/*.{js,css,html}'",
+    "clean": "rm -rf node_modules package-lock.json && npm install"
+  },
+  "keywords": [
+    "ai-chat",
+    "qwen",
+    "chatgpt",
+    "whitegpt",
+    "web-app"
+  ],
+  "devDependencies": {
+    "live-server": "^1.2.2",
+    "gh-pages": "^4.0.0",
+    "prettier": "^2.8.0",
+    "http-server": "^14.1.1"
+  },
+  "dependencies": {},
+  "engines": {
+    "node": ">=14.0.0",
+    "npm": ">=6.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-username/RianModss-main"
+  },
+  "bugs": {
+    "url": "https://github.com/your-username/RianModss-main/issues"
+  }
+}

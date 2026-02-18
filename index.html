@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <script src="src/js/role-manager.js"></script>
+  <script src="src/js/auth-new.js"></script>
+  <script>
+    if (!isAuthenticated()) {
+      window.location.href = "src/pages/login.html";
+    }
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WhiteGpt | AI Assistant</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="src/css/style.css">
+  <link rel="stylesheet" href="src/css/animations.css">
+  <link rel="stylesheet" href="src/css/sidebar.css">
+  <!-- Qwen AI Thinking Display UI -->
+  <link rel="stylesheet" href="src/css/thinking-ui.css">
+</head>
+<body>
+  <!-- Sidebar Navigation -->
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-header">
+      <div class="sidebar-brand">
+        <i class="fas fa-bolt"></i>
+        <span>WhiteGpt</span>
+      </div>
+      <button id="toggle-sidebar" class="toggle-btn">
+        <i class="fas fa-chevron-left"></i>
+      </button>
+    </div>
+
+    <div class="sidebar-content">
+      <button id="new-chat-sidebar" class="new-chat-btn">
+        <i class="fas fa-plus"></i>
+        <span>New Chat</span>
+      </button>
+
+      <div class="sidebar-section">
+        <div class="sidebar-label">Recent Chats</div>
+        <div id="recent-chats" class="recent-chats-list">
+          <!-- Dynamic chat history -->
+        </div>
+      </div>
+    </div>
+
+    <div class="sidebar-footer">
+      <button id="user-menu-btn" class="user-menu-btn">
+        <i class="fas fa-user-circle"></i>
+        <span id="current-user">User</span>
+      </button>
+    </div>
+  </aside>
+
+  <!-- Main Content -->
+  <div class="main-container">
+    <!-- Devil Loading Screen -->
+    <div class="devil-loader" id="devil-loader">
+    <div class="devil-character">
+      <div class="devil-head">
+        <div class="devil-horn left"></div>
+        <div class="devil-horn right"></div>
+        <div class="devil-eye left"></div>
+        <div class="devil-eye right"></div>
+        <div class="devil-smile"></div>
+      </div>
+      <div class="devil-body"></div>
+      <div class="devil-arm left"></div>
+      <div class="devil-arm right"></div>
+      <div class="devil-tail"></div>
+      <div class="energy-particle"></div>
+      <div class="energy-particle"></div>
+      <div class="energy-particle"></div>
+      <div class="energy-particle"></div>
+      <div class="energy-particle"></div>
+    </div>
+    <div class="loading-text">
+      Loading
+      <div class="loading-dots">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+    <div class="loading-progress">
+      <div class="loading-progress-bar"></div>
+    </div>
+  </div>
+
+    <!-- Header -->
+    <header>
+    <div class="header-content">
+      <div class="header-title">
+        <div class="logo-icon">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M13 2L3 14h8l-1 8 10-12h-8l1-8z" fill="currentColor"/>
+          </svg>
+        </div>
+        <div class="brand-text">
+          <h1 id="app-header">WhiteGpt</h1>
+          <span class="brand-subtitle">AI Assistant</span>
+        </div>
+      </div>
+      
+      <div class="header-controls">
+        <div class="status-indicator online">
+          <span class="status-dot"></span>
+          <span>Online</span>
+        </div>
+        
+        <!-- Dropdown Menu -->
+        <div class="dropdown">
+          <button id="menu-btn" class="control-btn btn-ripple" title="Menu">
+            <i class="fas fa-ellipsis-v"></i>
+          </button>
+          <div id="dropdown-menu" class="dropdown-menu">
+            <button id="refresh-api-btn" class="dropdown-item">
+              <i class="fas fa-sync-alt"></i>
+              <span>Refresh API</span>
+            </button>
+            <button id="new-chat-btn" class="dropdown-item">
+              <i class="fas fa-plus"></i>
+              <span>Chat Baru</span>
+            </button>
+            <button id="history-btn" class="dropdown-item">
+              <i class="fas fa-history"></i>
+              <span>Riwayat Chat</span>
+            </button>
+            <!-- ADMIN PANEL BUTTON (Only visible for admins) -->
+            <button id="admin-panel-btn" class="dropdown-item" style="display: none;">
+              <i class="fas fa-user-shield"></i>
+              <span>Admin Panel</span>
+            </button>
+            <div class="dropdown-divider"></div>
+            <button id="logout-btn" class="dropdown-item">
+              <i class="fas fa-sign-out-alt"></i>
+              <span>Keluar</span>
+            </button>
+          </div>
+        </div>
+        
+        <a href="https://t.me/RianModss" target="_blank" class="contact-dev btn-shimmer">
+          <i class="fab fa-telegram"></i>
+          <span>Contact Dev</span>
+        </a>
+      </div>
+    </div>
+    </header>
+
+    <!-- History Panel -->
+    <div id="history-panel" class="history-panel">
+    <div class="history-header">
+      <div class="history-title-section">
+        <i class="fas fa-history"></i>
+        <h3>Riwayat Chat</h3>
+      </div>
+      <button id="close-history" class="close-btn">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+    <div id="history-list" class="history-list">
+      <div class="history-empty">
+        <i class="fas fa-inbox"></i>
+        <p>Belum ada riwayat chat</p>
+      </div>
+    </div>
+    </div>
+
+    <!-- Chat Window -->
+    <div id="chat-window">
+    <div class="welcome-screen">
+      <div class="welcome-icon">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M13 2L3 14h8l-1 8 10-12h-8l1-8z" fill="url(#gradient)"/>
+          <defs>
+            <linearGradient id="gradient" x1="3" y1="2" x2="21" y2="22">
+              <stop offset="0%" stop-color="#ff0033"/>
+              <stop offset="100%" stop-color="#ff1a1a"/>
+            </linearGradient>
+          </defs>
+        </svg>
+      </div>
+      <h2>Selamat datang di WhiteGpt</h2>
+      <p>AI Assistant yang siap membantu Anda dengan berbagai tugas</p>
+      <div class="feature-cards">
+        <div class="feature-card">
+          <i class="fas fa-code"></i>
+          <h4>Coding Assistant</h4>
+          <p>Bantuan pemrograman dalam berbagai bahasa</p>
+        </div>
+        <div class="feature-card">
+          <i class="fas fa-file-code"></i>
+          <h4>File Analysis</h4>
+          <p>Upload dan analisis file kode</p>
+        </div>
+        <div class="feature-card">
+          <i class="fas fa-comments"></i>
+          <h4>Chat History</h4>
+          <p>Simpan dan akses percakapan sebelumnya</p>
+        </div>
+      </div>
+    </div>
+    </div>
+
+    <!-- Input Area -->
+    <div id="input-area">
+    <div class="file-preview" id="file-preview">
+      <div class="file-preview-content">
+        <div class="file-preview-info">
+          <i class="fas fa-file-code file-icon"></i>
+          <div class="file-info">
+            <span class="file-name" id="preview-file-name"></span>
+            <span class="file-size" id="preview-file-size"></span>
+          </div>
+        </div>
+        <button class="remove-file" id="remove-file" title="Hapus file">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+    </div>
+    
+    <div class="input-wrapper">
+      <div class="input-controls">
+        <input type="file" id="file-input" accept=".txt,.js,.py,.html,.css,.json,.md,.java,.cpp,.c,.php,.rb,.go,.rs,.ts,.jsx,.tsx,.vue,.xml,.yaml,.yml,.sh,.bat" />
+        <button id="file-button" class="icon-btn btn-ripple" title="Upload file kode">
+          <i class="fas fa-paperclip"></i>
+        </button>
+      </div>
+      
+      <div class="input-container">
+        <textarea id="chat-input" placeholder="Ketik pesan atau upload file kode..." rows="1"></textarea>
+        <button id="send-button" class="send-btn btn-ripple btn-shimmer">
+          <span class="button-text">
+            <i class="fas fa-paper-plane"></i>
+            <span>Kirim</span>
+          </span>
+        </button>
+      </div>
+    </div>
+    </div>
+  </div>
+
+  <script src="apikey.js"></script>
+  <script src="config.js"></script>
+  <script src="role-manager.js"></script>
+  <script src="chat-logger.js"></script>
+  <script src="backend-handlers.js"></script>
+  <script src="src/js/sidebar.js"></script>
+  <script src="src/js/main.js"></script>
+  <script src="src/js/auth-new.js"></script>
+  <script src="src/js/keamanan.js"></script>
+  <!-- Qwen AI Thinking Display System -->
+  <script src="src/js/thinking-ui.js"></script>
+  <script src="src/js/main-qwen-ui.js"></script>
+  <script>
+    // Hide loading screen after page loads
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        const loader = document.getElementById('devil-loader');
+        if (loader) {
+          loader.classList.add('hidden');
+        }
+      }, 2000); // Show loading for 2 seconds
+    });
+
+    // Check authentication
+    if (!isAuthenticated()) {
+      window.location.href = "login.html";
+    }
+    
+    // Show admin panel button if user is admin
+    document.addEventListener('DOMContentLoaded', () => {
+      if (RoleManager.isAdmin()) {
+        document.getElementById('admin-panel-btn').style.display = 'flex';
+      }
+      
+      // Admin panel button click
+      document.getElementById('admin-panel-btn').addEventListener('click', () => {
+        window.location.href = 'admin.html';
+      });
+    });
+  </script>
+</body>
+</html>
